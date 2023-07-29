@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+// use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group(['prefix' => '/penjualan', 'as' => 'penjualan.'], function () {
+    Route::get('/', [\App\Http\Controllers\Penjualan::class, 'index'])->name('index');
+    Route::group(['prefix' => '/barang', 'as' => 'barang.'], function () {
+        Route::get('/', [\App\Http\Controllers\Penjualan::class, 'barang'])->name('index');
+    });
 });
